@@ -1,0 +1,17 @@
+{
+    "name": "versonix/interview",
+    "description": "Interview project",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "Versonix\\Interview\\": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.2",
+        "guzzlehttp/guzzle": "dev-master",
+        "monolog/monolog": "^3.0@dev",
+        "jenssegers/blade": "dev-master"
+    }
+}

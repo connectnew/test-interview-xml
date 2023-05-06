@@ -1,0 +1,37 @@
+version: '3.8'
+
+services:
+
+  php:
+    build:
+      context: docker/php
+    container_name: interview_xml_php
+    volumes:
+      - .:/www
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/custom.ini:ro
+    environment:
+      NGINX_STATIC_IP: 172.23.0.3
+    networks:
+      - interview_xml_net
+
+  nginx:
+    depends_on:
+      - php
+    image: nginx:latest
+    container_name: interview_xml_nginx
+    working_dir: /www
+    ports:
+      - 8158:80
+    volumes:
+      - .:/www
+      - ./docker/nginx:/etc/nginx/conf.d
+    networks:
+      interview_xml_net:
+        ipv4_address: 172.23.0.3
+
+networks:
+  interview_xml_net:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.23.0.0/24
